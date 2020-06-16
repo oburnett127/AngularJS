@@ -1,0 +1,80 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+  </head>
+<style>
+.ng-hide {
+  height: 0;
+  width: 0;
+  background-color: transparent;
+  top:-200px;
+  left: 200px;
+}
+
+input.ng-invalid {
+    background-color: pink;
+}
+</style>
+<body ng-controller="personCtrl">
+<div>
+Email:
+<input type="email" name="myAddress" ng-model="text">
+<p>My first expression: {{ 20 + 20 }}</p>
+First Name: <input type="text" ng-model="firstName"><br>
+Last Name: <input type="text" ng-model="lastName"><br><br>
+Full Name: {{fullName()}}<br><br>
+
+<table>
+  <tr ng-repeat="x in names">
+    <td>{{ x.name }}</td>
+    <td>{{ x.state }}</td>
+  </tr>
+</table>
+
+<p>Select a car:</p>
+
+<select ng-model="selectedCar" ng-options="x.model for x in cars"></select>
+
+<h1>You selected: {{selectedCar.model}}</h1>
+<p>Its color is: {{selectedCar.color}}</p>
+
+<p><button ng-disabled="mySwitch">Click Me!</button></p>
+<p><input type="checkbox" ng-model="mySwitch"/></p>
+<h1 ng-mousemove="count = count + 1">Mouse over me!</h1>
+
+<h2>{{ count }}</h2>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('personCtrl', function personCtrl($scope) {
+	
+	$scope.firstName = "John";
+	$scope.lastName = "Doe";
+	$scope.fullName = function() {
+        	return $scope.firstName + " " + $scope.lastName;
+   	};
+	
+	$scope.names = [
+        {name:'Allen',state:'Oklahoma'},
+        {name:'Carl',state:'Texas'},
+        {name:'Tom',state:'Montana'},
+        {name:'Gary',state:'California'},
+        {name:'William',state:'Vermont'},
+        {name:'Stephen',state:'Virginia'},
+        {name:'Frank',state:'Florida'},
+        {name:'Paul',state:'New York'},
+        {name:'Tim',state:'Nevada'}
+        ];
+	
+	$scope.cars = [
+        {model : "Honda Civic", color : "red"},
+        {model : "Ford Tundra", color : "blue"},
+        {model : "Toyota Camry", color : "green"}
+	];
+	
+	$scope.count = 0;
+});
+</script>
+</body>
+</html>
